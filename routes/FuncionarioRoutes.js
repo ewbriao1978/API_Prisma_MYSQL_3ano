@@ -3,5 +3,7 @@ const FuncionarioController = require('../controllers/FuncionarioController')
 
 const router = express.Router()
 router.get('/funcionarios',FuncionarioController.listarFuncionarios)
+router.post('/funcionario',FuncionarioController.criarFuncionarios)
+router.delete('/funcionario/:id', FuncionarioController.deletarFuncionario)
 
 module.exports = router
