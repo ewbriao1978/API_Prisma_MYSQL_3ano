@@ -12,6 +12,26 @@ module.exports = {
         }
     },
 
+    async buscaFuncionario(req,res){
+        try {
+            const {id} = req.params;
+            const funcionario = await prisma.funcionario.findUnique({
+                where: { id: Number(id) }
+            });
+            if (!funcionario){
+                return res.status(404).json( 
+                    {
+                        error: "Funcionario não encontrado"}
+                    );
+            }
+            res.status(200).json(funcionario)
+
+        }catch(error){
+            res.status(500).json({ error: "Erro de acesso aos dados do funcionário" });
+      
+        }
+    },
+
     async criarFuncionarios(req,res){
         try {
             const {
