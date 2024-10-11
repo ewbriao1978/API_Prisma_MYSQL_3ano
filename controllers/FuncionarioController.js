@@ -50,6 +50,29 @@ module.exports = {
 
         }
     },
+
+    async atualizarFuncionario(req,res){
+        try{
+            const { id } = req.params;
+            //const matricula = req.body.matricula;
+            const { matricula, nome, email, salario_bruto } = req.body;
+            const funcionario = await prisma.funcionario.update({
+                where: { id: Number(id) },
+                data: { 
+                    matricula, 
+                    nome,
+                    email,
+                    salario_bruto
+                }
+            })
+            res.status(200).json({ message: "Atualização realizada com sucesso" });
+
+        }catch(error){
+            res.status(500).json({ error: "Erro ao atualizar o funcionário" });
+        }
+
+    },
+
     async deletarFuncionario(req,res){
         try {
             //const id = req.params.id;
